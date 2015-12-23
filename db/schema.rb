@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151213191419) do
+ActiveRecord::Schema.define(version: 20151223043431) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title",             limit: 255
@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(version: 20151213191419) do
     t.integer  "page_count",        limit: 4
     t.integer  "rating",            limit: 4
     t.string   "genre",             limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",      limit: 255
+    t.string   "api_key",    limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
