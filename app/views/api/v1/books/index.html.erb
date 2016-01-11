@@ -1,0 +1,50 @@
+ <div ng-app="app">
+  <div ng-controller="bookCtrl" ng-init="setup()">
+
+    <datalist id="names">
+      <option ng-repeat="book in books">{{book.author_last_name}}</option>
+    </datalist>    
+    <datalist id="titles">
+      <option ng-repeat="book in searchBooks">{{book.title}}</option>
+    </datalist>
+
+
+    <p>Search by Author's Last Name: <input ng-model="nameFilter" list="names"></p>
+    <p>Search by Title: <input ng-model="titleFilter" ng-keyup="searchBooks(titleFilter)" list="titles"></p>
+    <table>
+      <tr>
+        <th ng-click="toggleOrder('author_last_name')">Author</th>
+        <th ng-click="toggleOrder('title')">Title</th>
+        <th>Delete?</th>
+      </tr>
+
+      <tr ng-repeat="book in books | filter: {author_last_name: nameFilter, title: titleFilter} | orderBy:orderAttribute:direction">
+        <td>{{book.author_first_name}} {{book.author_last_name}}</td>
+        <td>{{book.title}}</td>
+        <td><a href="#" ng-click="deleteBook(book)">Delete</a></td>
+      </tr>
+    </table>
+
+
+    <div>
+      <h3>Add Book:</h3>
+      <ul>
+        <li class="error-messages" ng-repeat="errorMessage in errorMessages">{{errorMessage}}</li>
+      </ul>
+      <div>
+        First Name: <input ng-model="bookFirstName">
+      </div>      
+      <div>
+        Last Name: <input ng-model="bookLastName">
+      </div>
+      <div>
+        Title: <input ng-model="bookTitle">
+      </div>
+
+      <button ng-click="addBook(bookFirstName, bookLastName, bookTitle)">Submit</button>
+    </div>
+
+
+  </div>
+</div>
+

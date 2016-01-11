@@ -1,4 +1,25 @@
-<% @books.each do |book| %>
-  <p><%= book.title %><br>
-  By: <%= book.author_first_name %> <%= book.author_last_name %><br></p>
-<% end %>
+
+ <div ng-app="app">
+  <div ng-controller="bookCtrl" ng-init="setup()">
+    <div ng-repeat="book in books track by $index">
+      <p ng-click="toggleTitle(book)">Title: {{book.title}}</p>
+    </div>
+    <div>
+      <h3>Add Book:</h3>
+      <div>
+        First Name: <input ng-model="bookFirstName">
+      </div>      
+      <div>
+        Last Name: <input ng-model="bookLastName">
+      </div>
+      <div>
+        Title: <textarea ng-model="bookTitle"></textarea>
+      </div>
+      <button ng-click="addPerson(bookFirstName, bookLastName, bookTitle)">Submit</button>
+    </div>
+
+
+  </div>
+</div>
+
+
